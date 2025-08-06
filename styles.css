@@ -91,82 +91,105 @@ body {
   justify-content: center;
 }
 
-/* Shimmer Button */
+/* Glassmorphism Shimmer Button */
 .shimmer-button {
   position: relative;
   display: inline-block;
-  padding: 20px 60px;
-  background: linear-gradient(135deg, 
-    rgba(212, 175, 55, 0.9) 0%, 
-    rgba(212, 175, 55, 0.7) 50%, 
-    rgba(212, 175, 55, 0.9) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  border-radius: 50px;
+  padding: 22px 65px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
   text-decoration: none;
   overflow: hidden;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   box-shadow: 
-    0 8px 32px rgba(212, 175, 55, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
 .shimmer-button::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
   background: linear-gradient(
     45deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.6) 50%,
-    transparent 70%
+    transparent,
+    rgba(212, 175, 55, 0.6),
+    transparent,
+    rgba(212, 175, 55, 0.6),
+    transparent
   );
-  transform: rotate(45deg);
-  animation: shimmer 2s infinite;
+  border-radius: 20px;
+  animation: shimmer 3s linear infinite;
+  z-index: -1;
+}
+
+.shimmer-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shine 2.5s infinite;
   pointer-events: none;
 }
 
 .button-text {
   position: relative;
   z-index: 2;
-  color: var(--color-primary);
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: 'Nunito', 'Trebuchet MS', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
 }
 
 .shimmer-button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.25);
   box-shadow: 
-    0 12px 40px rgba(212, 175, 55, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-  background: linear-gradient(135deg, 
-    rgba(212, 175, 55, 1) 0%, 
-    rgba(212, 175, 55, 0.8) 50%, 
-    rgba(212, 175, 55, 1) 100%);
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 .shimmer-button:active {
-  transform: translateY(0);
-  box-shadow: 
-    0 6px 20px rgba(212, 175, 55, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 @keyframes shimmer {
   0% {
-    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    background-position: -200% 0;
   }
   100% {
-    transform: translateX(100%) translateY(100%) rotate(45deg);
+    background-position: 200% 0;
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
   }
 }
 
